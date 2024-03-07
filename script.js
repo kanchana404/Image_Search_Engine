@@ -1,6 +1,8 @@
 let perPage = 12; // Initial number of images per page
 let currentPage = 1; // Initial page number
 
+const accessKey = "{Your Unslpash key}"
+
 function search() {
     let query = document.getElementById('keyword').value.trim();
 
@@ -14,7 +16,7 @@ function search() {
         query = query.split(' ').join('_');
     }
 
-    fetch(`https://api.unsplash.com/search/photos?page=${currentPage}&query=${query}&client_id=NfurjGmLWkHYg7ndGK7mE-6-LhNcy8ic1f26lsBz2Zo&per_page=${perPage}`)
+    fetch(`https://api.unsplash.com/search/photos?page=${currentPage}&query=${query}&client_id=${accessKey}_page=${perPage}`)
         .then(response => response.json())
         .then(data => {
             const photos = data.results;
