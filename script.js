@@ -8,10 +8,20 @@ function search() {
             const photos = data.results;
 
             // Define the parent container where the instances will be appended
-            var parentContainer = document.getElementById('box');
+            var parentContainer = document.getElementById('sectionss');
 
             // Clear the existing content in the parent container
             parentContainer.innerHTML = '';
+
+            // Create a new row element
+            var newRow = document.createElement('div');
+            newRow.classList.add('row');
+            newRow.id = 'box'; // Set the id of the new row
+            newRow.style.paddingTop = '15px'; // Add padding top
+            newRow.style.paddingBottom = '25px'; // Add padding bottom
+
+            // Append the new row to the parent container
+            parentContainer.appendChild(newRow);
 
             // Loop through each photo
             photos.forEach(photo => {
@@ -35,7 +45,7 @@ function search() {
                 containerDiv2.appendChild(image);
                 containerDiv1.appendChild(containerDiv2);
                 columnDiv.appendChild(containerDiv1);
-                parentContainer.appendChild(columnDiv);
+                newRow.appendChild(columnDiv); // Append to the new row
             });
 
             // Log the number of image links
