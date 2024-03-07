@@ -53,10 +53,23 @@ function search() {
                 newRow.appendChild(columnDiv); // Append to the new row
             });
 
+            // Create a button element for loading more photos
+            var loadMoreButton = document.createElement('button');
+            loadMoreButton.innerHTML = 'Load More';
+            loadMoreButton.classList.add('btn', 'btn-dark', 'btn-lg', 'btn-block');
+            loadMoreButton.onclick = addMore; // Set the onclick event to call addMore function
+
+            // Append the load more button to the bottom of the box div
+            newRow.appendChild(loadMoreButton);
+
             // Log the number of image links
             console.log('Number of image links:', photos.length);
         })
         .catch(error => {
             console.error('Error fetching data:', error);
         });
+}
+
+function addMore() {
+    alert('Load more photos functionality will be implemented here.');
 }
