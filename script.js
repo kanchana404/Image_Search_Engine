@@ -6,7 +6,7 @@ function search() {
         query = query.split(' ').join('_');
     }
 
-    fetch(`https://api.unsplash.com/search/photos?page=1&query=${query}&client_id=NfurjGmLWkHYg7ndGK7mE-6-LhNcy8ic1f26lsBz2Zo`)
+    fetch(`https://api.unsplash.com/search/photos?page=1&query=${query}&client_id=NfurjGmLWkHYg7ndGK7mE-6-LhNcy8ic1f26lsBz2Zo&per_page=12`)
         .then(response => response.json()) // Parse JSON response
         .then(data => {
             // Access the photos array in the response
@@ -71,5 +71,5 @@ function search() {
 }
 
 function addMore() {
-    alert('Load more photos functionality will be implemented here.');
+    alert('Load more function is still undermaintains.');
 }
