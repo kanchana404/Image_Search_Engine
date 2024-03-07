@@ -1,36 +1,28 @@
-function search() {
-    let query = document.getElementById('keyword').value.trim(); // Remove leading and trailing whitespaces
+let perPage = 12; // Initial number of images per page
+let currentPage = 1; // Initial page number
 
-    // If query contains more than one word, replace spaces with underscores
+function search() {
+    let query = document.getElementById('keyword').value.trim();
+
     if (query.split(' ').length > 1) {
         query = query.split(' ').join('_');
     }
 
-    fetch(`https://api.unsplash.com/search/photos?page=1&query=${query}&client_id=NfurjGmLWkHYg7ndGK7mE-6-LhNcy8ic1f26lsBz2Zo&per_page=12`)
-        .then(response => response.json()) // Parse JSON response
+    fetch(`https://api.unsplash.com/search/photos?page=${currentPage}&query=${query}&client_id=NfurjGmLWkHYg7ndGK7mE-6-LhNcy8ic1f26lsBz2Zo&per_page=${perPage}`)
+        .then(response => response.json())
         .then(data => {
-            // Access the photos array in the response
             const photos = data.results;
-
-            // Define the parent container where the instances will be appended
             var parentContainer = document.getElementById('sectionss');
-
-            // Clear the existing content in the parent container
             parentContainer.innerHTML = '';
 
-            // Create a new row element
             var newRow = document.createElement('div');
             newRow.classList.add('row');
-            newRow.id = 'box'; // Set the id of the new row
-            newRow.style.paddingTop = '15px'; // Add padding top
-            newRow.style.paddingBottom = '25px'; // Add padding bottom
-
-            // Append the new row to the parent container
+            newRow.id = 'box';
+            newRow.style.paddingTop = '15px';
+            newRow.style.paddingBottom = '25px';
             parentContainer.appendChild(newRow);
 
-            // Loop through each photo
             photos.forEach(photo => {
-                // Create elements
                 var columnDiv = document.createElement('div');
                 columnDiv.classList.add('col-lg-3', 'col-md-6', 'col-sm-12');
                 columnDiv.style.paddingBottom = '15px';
@@ -46,23 +38,18 @@ function search() {
                 image.src = photo.urls.regular;
                 image.alt = '';
 
-                // Append elements to each other
                 containerDiv2.appendChild(image);
                 containerDiv1.appendChild(containerDiv2);
                 columnDiv.appendChild(containerDiv1);
-                newRow.appendChild(columnDiv); // Append to the new row
+                newRow.appendChild(columnDiv);
             });
 
-            // Create a button element for loading more photos
             var loadMoreButton = document.createElement('button');
             loadMoreButton.innerHTML = 'Load More';
             loadMoreButton.classList.add('btn', 'btn-dark', 'btn-lg', 'btn-block');
-            loadMoreButton.onclick = addMore; // Set the onclick event to call addMore function
-
-            // Append the load more button to the bottom of the box div
+            loadMoreButton.onclick = addMore;
             newRow.appendChild(loadMoreButton);
 
-            // Log the number of image links
             console.log('Number of image links:', photos.length);
         })
         .catch(error => {
@@ -71,5 +58,10 @@ function search() {
 }
 
 function addMore() {
-    alert('Load more function is still undermaintains.');
+    // Increment perPage by 4
+    perPage += 4;
+    // Increment currentPage
+    currentPage++;
+    
+    search(); // Call search function to load more images
 }
