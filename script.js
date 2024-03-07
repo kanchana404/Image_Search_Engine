@@ -4,6 +4,12 @@ let currentPage = 1; // Initial page number
 function search() {
     let query = document.getElementById('keyword').value.trim();
 
+    // Check if query is empty
+    if (query === '') {
+        alert('Please enter a keyword to start the search.');
+        return; // Exit the function if no keyword is entered
+    }
+
     if (query.split(' ').length > 1) {
         query = query.split(' ').join('_');
     }
@@ -33,6 +39,7 @@ function search() {
 
                 var containerDiv2 = document.createElement('div');
                 containerDiv2.classList.add('container');
+                
 
                 var image = document.createElement('img');
                 image.src = photo.urls.regular;
