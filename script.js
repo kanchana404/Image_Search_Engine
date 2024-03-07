@@ -1,5 +1,10 @@
 function search() {
-    const query = document.getElementById('keyword').value;
+    let query = document.getElementById('keyword').value.trim(); // Remove leading and trailing whitespaces
+
+    // If query contains more than one word, replace spaces with underscores
+    if (query.split(' ').length > 1) {
+        query = query.split(' ').join('_');
+    }
 
     fetch(`https://api.unsplash.com/search/photos?page=1&query=${query}&client_id=NfurjGmLWkHYg7ndGK7mE-6-LhNcy8ic1f26lsBz2Zo`)
         .then(response => response.json()) // Parse JSON response
